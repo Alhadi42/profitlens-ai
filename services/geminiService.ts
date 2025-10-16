@@ -19,7 +19,7 @@ import type {
   CompetitorAnalysis,
 } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY! });
 let chat: Chat;
 
 const handleApiError = (error: unknown, functionName: string): never => {
