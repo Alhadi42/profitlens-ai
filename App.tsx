@@ -2,7 +2,7 @@
 import React, { useState, lazy, Suspense } from 'react';
 import Layout from './components/Layout';
 import type { View } from './types';
-import { useProfitLensData } from './hooks/useProfitLensData';
+import { useSupabaseData } from './hooks/useSupabaseData';
 
 // Lazy load all the views for code-splitting
 const DashboardView = lazy(() => import('./views/DashboardView'));
@@ -25,12 +25,13 @@ function App() {
   const [viewProps, setViewProps] = useState<Record<string, any>>({});
 
   const {
+      loading,
       outlets,
       currentOutletId,
       setCurrentOutletId,
       notifications,
       markNotificationsAsRead
-  } = useProfitLensData();
+  } = useSupabaseData();
 
   const handleNavigate = (view: View, props: Record<string, any> = {}) => {
     setCurrentView(view);
@@ -42,6 +43,10 @@ function App() {
     localStorage.setItem('onboardingComplete', 'true');
     setIsOnboardingComplete(true);
   };
+
+  if (loading) {
+    return <div className="flex items-center justify-center h-screen bg-slate-900 text-white">Memuat data...</div>;
+  }
 
   if (!isOnboardingComplete) {
     return <OnboardingView onComplete={handleOnboardingComplete} />;

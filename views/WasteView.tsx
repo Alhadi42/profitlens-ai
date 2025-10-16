@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import Toast from '../components/Toast';
 import WasteLogForm from '../components/WasteLogForm';
 import WasteHistoryTable from '../components/WasteHistoryTable';
@@ -27,7 +27,7 @@ const WasteView: React.FC = () => {
         wasteSummary,
         salesHistory,
         menuItems
-    } = useProfitLensData();
+    } = useSupabaseData();
 
     const [toast, setToast] = useState<ToastState>(null);
     const [isAdvisorOpen, setIsAdvisorOpen] = useState(false);

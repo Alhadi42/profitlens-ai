@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import { getProfitLossAnalysis } from '../services/geminiService';
 import CostBreakdownChart from '../components/CostBreakdownChart';
 import { LightBulbIcon } from '../components/icons/LightBulbIcon';
@@ -7,7 +7,7 @@ import type { ProfitLossStats } from '../types';
 import { formatRupiah } from '../utils/formatters';
 
 const ProfitLossView: React.FC = () => {
-    const { profitLossStats } = useProfitLensData();
+    const { profitLossStats } = useSupabaseData();
     const [isLoading, setIsLoading] = useState(false);
     const [analysis, setAnalysis] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);

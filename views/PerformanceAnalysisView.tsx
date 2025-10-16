@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import { getBasketAnalysis, getMarketingCampaignSuggestion, getMenuEngineeringAnalysis, getCompetitorAnalysis } from '../services/geminiService';
 import type { BasketAnalysis, MarketingCampaignSuggestion, MenuEngineeringAnalysis, CompetitorAnalysis } from '../types';
 import { LightBulbIcon } from '../components/icons/LightBulbIcon';
@@ -18,7 +18,7 @@ type ToastState = {
 } | null;
 
 const PerformanceAnalysisView: React.FC = () => {
-    const { outlets, currentOutletId, salesHistory, menuItems, profitLossStats, activeCampaign, launchCampaign } = useProfitLensData();
+    const { outlets, currentOutletId, salesHistory, menuItems, profitLossStats, activeCampaign, launchCampaign } = useSupabaseData();
     const [isLoadingAnalysis, setIsLoadingAnalysis] = useState(false);
     const [basketAnalysis, setBasketAnalysis] = useState<BasketAnalysis | null>(null);
     const [analysisError, setAnalysisError] = useState<string | null>(null);

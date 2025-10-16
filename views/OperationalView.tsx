@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import OperationalCostsTable from '../components/OperationalCostsTable';
 import OperationalCostEditorModal from '../components/OperationalCostEditorModal';
 import OperationalCostSummary from '../components/OperationalCostSummary';
@@ -31,7 +31,7 @@ const OperationalView: React.FC = () => {
         addOperationalCost,
         updateOperationalCost,
         deleteOperationalCost,
-    } = useProfitLensData();
+    } = useSupabaseData();
 
     const [editorState, setEditorState] = useState<EditorState>({ mode: 'closed' });
     const [toast, setToast] = useState<ToastState>(null);

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import MenuEditorModal from '../components/MenuEditorModal';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import BusinessOverview from '../components/BusinessOverview';
 import SalesChart from '../components/SalesChart';
 import DailyPriceUpdateModal from '../components/DailyPriceUpdateModal';
@@ -45,7 +45,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate }) => {
     setDateRange,
     isComparing,
     toggleComparison,
-  } = useProfitLensData();
+  } = useSupabaseData();
 
   const [isPriceModalOpen, setIsPriceModalOpen] = useState(false);
   const [toast, setToast] = useState<ToastState>(null);

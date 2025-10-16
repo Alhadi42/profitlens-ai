@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import Toast from '../components/Toast';
 import SupplierEditorModal from '../components/SupplierEditorModal';
 import SupplierIngredientsPanel from '../components/SupplierIngredientsPanel';
@@ -20,7 +20,7 @@ const SuppliersView: React.FC = () => {
         addSupplier,
         updateSupplier,
         deleteSupplier,
-    } = useProfitLensData();
+    } = useSupabaseData();
 
     const [selectedSupplier, setSelectedSupplier] = useState<Supplier | null>(suppliers[0] || null);
     const [isEditorOpen, setIsEditorOpen] = useState(false);

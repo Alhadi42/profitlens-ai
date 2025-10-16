@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import { getSalesForecast } from '../services/geminiService';
 import type { Forecast, MenuItem } from '../types';
 import ForecastingControls from '../components/ForecastingControls';
 import ForecastingResults from '../components/ForecastingResults';
 
 const ForecastingView: React.FC = () => {
-  const { menuItems, salesHistory } = useProfitLensData();
+  const { menuItems, salesHistory } = useSupabaseData();
   const [selectedMenuItemId, setSelectedMenuItemId] = useState<string>(menuItems[0]?.id || '');
   const [isLoading, setIsLoading] = useState(false);
   const [forecast, setForecast] = useState<Forecast | null>(null);

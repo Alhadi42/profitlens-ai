@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import MenuTable from '../components/MenuTable';
 import MenuEditorModal from '../components/MenuEditorModal';
 import AiCreateMenuModal from '../components/AiCreateMenuModal';
@@ -34,7 +34,7 @@ const MenuView: React.FC = () => {
         addMenuItem,
         updateMenuItem,
         deleteMenuItem
-    } = useProfitLensData();
+    } = useSupabaseData();
 
     const [editorState, setEditorState] = useState<EditorState>({ mode: 'closed' });
     const [isAiModalOpen, setIsAiModalOpen] = useState(false);

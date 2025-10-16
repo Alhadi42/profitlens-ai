@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import type { Outlet, User } from '../types';
 import Toast from '../components/Toast';
 import { PencilIcon } from '../components/icons/PencilIcon';
@@ -12,7 +12,7 @@ import { CloseIcon } from '../components/icons/CloseIcon';
 type ToastState = { show: boolean; message: string; type: 'success' | 'error'; } | null;
 
 const ProfileView: React.FC = () => {
-    const { user, outlets, updateUser, addOutlet, updateOutlet, deleteOutlet } = useProfitLensData();
+    const { user, outlets, updateUser, addOutlet, updateOutlet, deleteOutlet } = useSupabaseData();
     
     const [userData, setUserData] = useState<Omit<User, 'avatarUrl'>>({ name: '', role: '' });
     const [toast, setToast] = useState<ToastState>(null);

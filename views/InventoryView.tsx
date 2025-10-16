@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import IngredientsTable from '../components/IngredientsTable';
 import InventoryStatus from '../components/InventoryStatus';
 import AddIngredientModal from '../components/AddIngredientModal';
@@ -39,7 +39,7 @@ const InventoryView: React.FC<InventoryViewProps> = (props) => {
         receiveStock,
         suppliers,
         wasteHistory,
-    } = useProfitLensData();
+    } = useSupabaseData();
 
     const [isEditing, setIsEditing] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);

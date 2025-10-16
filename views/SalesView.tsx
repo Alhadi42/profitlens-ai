@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useProfitLensData } from '../hooks/useProfitLensData';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import { getSalesAnalysis, getSalesForecast } from '../services/geminiService';
 import SalesAnalysisModal from '../components/SalesAnalysisModal';
 import { ExclamationCircleIcon } from '../components/icons/ExclamationCircleIcon';
@@ -11,7 +11,7 @@ type ForecastForModal = {
 };
 
 const SalesView: React.FC = () => {
-    const { menuItems, ingredients, salesHistory, processDailySales, checkStockAvailability } = useProfitLensData();
+    const { menuItems, ingredients, salesHistory, processDailySales, checkStockAvailability } = useSupabaseData();
     const [salesInput, setSalesInput] = useState<Record<string, number>>({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [analysisResult, setAnalysisResult] = useState<string | null>(null);
