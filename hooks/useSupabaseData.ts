@@ -18,6 +18,7 @@ export const useSupabaseData = () => {
   const [activeCampaign, setActiveCampaign] = useState<ActiveCampaign | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState(30);
   const [isComparing, setIsComparing] = useState(false);
   const [readNotifications, setReadNotifications] = useState<string[]>([]);
@@ -25,6 +26,8 @@ export const useSupabaseData = () => {
   const loadAllData = useCallback(async () => {
     try {
       setLoading(true);
+      setError(null);
+      
       const [
         outletsData,
         ingredientsData,
@@ -67,6 +70,7 @@ export const useSupabaseData = () => {
       setActiveCampaign(campaignData);
     } catch (error) {
       console.error('Error loading data:', error);
+      setError('Gagal memuat data. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }
@@ -76,15 +80,38 @@ export const useSupabaseData = () => {
     loadAllData();
   }, []);
 
-  const ingredients = useMemo(() => allIngredients.filter(i => i.outletId === currentOutletId), [allIngredients, currentOutletId]);
-  const salesHistory = useMemo(() => allSalesHistory.filter(s => s.outletId === currentOutletId), [allSalesHistory, currentOutletId]);
-  const operationalCosts = useMemo(() => allOperationalCosts.filter(c => c.outletId === currentOutletId), [allOperationalCosts, currentOutletId]);
-  const wasteHistory = useMemo(() => allWasteHistory.filter(w => w.outletId === currentOutletId), [allWasteHistory, currentOutletId]);
-  const pendingOrders = useMemo(() => allPendingOrders.filter(p => p.outletId === currentOutletId), [allPendingOrders, currentOutletId]);
+  // Memoized filtered data for current outlet
+  const ingredients = useMemo(() => 
+    allIngredients.filter(i => i.outletId === currentOutletId), 
+    [allIngredients, currentOutletId]
+  );
+  
+  const salesHistory = useMemo(() => 
+    allSalesHistory.filter(s => s.outletId === currentOutletId), 
+    [allSalesHistory, currentOutletId]
+  );
+  
+  const operationalCosts = useMemo(() => 
+    allOperationalCosts.filter(c => c.outletId === currentOutletId), 
+    [allOperationalCosts, currentOutletId]
+  );
+  
+  const wasteHistory = useMemo(() => 
+    allWasteHistory.filter(w => w.outletId === currentOutletId), 
+    [allWasteHistory, currentOutletId]
+  );
+  
+  const pendingOrders = useMemo(() => 
+    allPendingOrders.filter(p => p.outletId === currentOutletId), 
+    [allPendingOrders, currentOutletId]
+  );
 
   const toggleComparison = useCallback(() => setIsComparing(prev => !prev), []);
 
+  // Optimized menu items calculation with memoization
   const menuItems = useMemo<MenuItem[]>(() => {
+    if (!ingredients.length || !menuItemsData.length) return [];
+    
     const ingredientsMap = new Map(ingredients.map(i => [i.id, i]));
 
     return menuItemsData.map(item => {
@@ -626,6 +653,7 @@ export const useSupabaseData = () => {
 
   return {
     loading,
+    error,
     ingredients: ingredientsWithWasteCost,
     menuItems,
     menuItemsData,
